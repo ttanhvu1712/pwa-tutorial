@@ -1,15 +1,15 @@
-const staticCacheName = 'site-static-v1';
-const dynamicCacheName = 'site-dynamic-v1';
+const staticCacheName = 'site-static-v5';
+const dynamicCacheName = 'site-dynamic-v5';
 const assets = [
   '/',
   '/index.html',
   '/js/app.js',
   '/js/ui.js',
-  '/js/materialize.min.js',
   '/css/styles.css',
   '/css/materialize.min.css',
   '/img/dish.png',
   'https://fonts.googleapis.com/icon?family=Material+Icons',
+  'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js',
   'https://fonts.gstatic.com/s/materialicons/v47/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2',
   '/pages/fallback.html'
 ];
@@ -51,22 +51,22 @@ self.addEventListener('activate', evt => {
 
 // fetch events
 self.addEventListener('fetch', evt => {
-  // if(evt.request.url.indexOf('firestore.googleapis.com') === -1){
-  //   evt.respondWith(
-  //     caches.match(evt.request).then(cacheRes => {
-  //       return cacheRes || fetch(evt.request).then(fetchRes => {
-  //         return caches.open(dynamicCacheName).then(cache => {
-  //           cache.put(evt.request.url, fetchRes.clone());
-  //           // check cached items size
-  //           limitCacheSize(dynamicCacheName, 15);
-  //           return fetchRes;
-  //         })
-  //       });
-  //     }).catch(() => {
-  //       if(evt.request.url.indexOf('.html') > -1){
-  //         return caches.match('/pages/fallback.html');
-  //       }
-  //     })
-  //   );
-  // }
+  if(evt.request.url.indexOf('firestore.googleapis.com') === -1){
+    evt.respondWith(
+      caches.match(evt.request).then(cacheRes => {
+        return cacheRes || fetch(evt.request).then(fetchRes => {
+          return caches.open(dynamicCacheName).then(cache => {
+            cache.put(evt.request.url, fetchRes.clone());
+            // check cached items size
+            limitCacheSize(dynamicCacheName, 15);
+            return fetchRes;
+          })
+        });
+      }).catch(() => {
+        if(evt.request.url.indexOf('.html') > -1){
+          return caches.match('/pages/fallback.html');
+        }
+      })
+    );
+  }
 });
