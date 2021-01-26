@@ -13,6 +13,7 @@ db.enablePersistence()
 // real-time listener
 db.collection('recipes').onSnapshot(snapshot => {
   snapshot.docChanges().forEach(change => {
+    console.log(change.doc.data())
     if(change.type === 'added'){
       renderRecipe(change.doc.data(), change.doc.id);
     }
@@ -26,9 +27,9 @@ db.collection('recipes').onSnapshot(snapshot => {
 const form = document.querySelector('form');
 form.addEventListener('submit', evt => {
   evt.preventDefault();
-  
+
   const recipe = {
-    name: form.title.value,
+    title: form.title.value,
     ingredients: form.ingredients.value
   };
 
