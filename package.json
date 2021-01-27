@@ -1,0 +1,11 @@
+{
+  "name": "pwa-tutorial",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ttanhvu1712/pwa-tutorial.git",
+  "author": "anhvu.tran <anhvu.tran@shopee.com>",
+  "license": "MIT",
+  "scripts": {
+    "ci": "firebase deploy"
+  }
+}
