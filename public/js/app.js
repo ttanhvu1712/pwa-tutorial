@@ -17,6 +17,7 @@ const requestPermission = () => {
   })
   .then((token) => {
     console.log(token)
+    showToken(token)
   })
   .catch((err) => {
     console.log('Error:', err)

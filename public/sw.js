@@ -14,8 +14,8 @@ var config = {
 firebase.initializeApp(config);
 const messaging = firebase.messaging();
 
-const staticCacheName = "site-static-v0";
-const dynamicCacheName = "site-dynamic-v0";
+const staticCacheName = "site-static-v1";
+const dynamicCacheName = "site-dynamic-v1";
 const assets = [
   "/",
   "/index.html",

@@ -31,3 +31,8 @@ const removeRecipe = (id) => {
   const recipe = document.querySelector(`.recipe[data-id=${id}]`);
   recipe.remove();
 }
+
+const showToken = (token) => {
+  const tokenHolder = document.getElementById('token');
+  tokenHolder.innerHTML = `${token}`
+}
